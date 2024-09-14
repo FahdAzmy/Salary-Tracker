@@ -5,14 +5,16 @@ import Cookies from "js-cookie";
 import { AuthContext } from "../contexts/AuthContext";
 
 function Header() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(null);
+  // Access authentication state from AuthContext
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // Initialize darkMode from localStorage; useState with lazy initialization
   const [darkMode, setDarkMode] = useState(
     () => localStorage.getItem("darkMode") === "true"
   );
 
+  // Add or remove the "dark" class from the document element based on darkMode state
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -21,6 +23,7 @@ function Header() {
     }
   }, [darkMode]);
 
+  // Toggle dark mode state and save preference to localStorage
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => {
       localStorage.setItem("darkMode", !prevDarkMode);
@@ -28,11 +31,13 @@ function Header() {
     });
   };
 
+  // Handle user logout: remove token cookie, update authentication state, and navigate to login page
   function handleLogout() {
-    Cookies.remove("token"); // إزالة التوكن من الكوكيز
-    setIsLoggedIn(false); // تعيين حالة تسجيل الخروج
-    navigate("/login"); // إعادة التوجيه لصفحة تسجيل الدخول
+    Cookies.remove("token");
+    setIsLoggedIn(false);
+    navigate("/login");
   }
+
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-lg dark:border-b-2 dark:border-slate-700  p-4 max-md:p-2 max-md:pb-2.5">
       <div className="container mx-auto flex justify-between items-center">
@@ -43,6 +48,7 @@ function Header() {
 
         {/* Right: Login, Register, Dark Mode Toggle */}
         <div className="flex items-center space-x-2 gap-1 max-md:space-x-3">
+          {/* Show Logout button if user is logged in, otherwise show Login and Register links */}
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
@@ -51,7 +57,6 @@ function Header() {
               Logout
             </button>
           ) : (
-            // إذا لم يكن المستخدم مسجلًا، عرض أزرار تسجيل الدخول والتسجيل
             <>
               <Link
                 to={"/login"}
@@ -69,7 +74,7 @@ function Header() {
             </>
           )}
 
-          {/* Dark Mode Toggle */}
+          {/* Dark Mode Toggle Button */}
           <button
             onClick={toggleDarkMode}
             className="w-7 h-7 outline outline-2 justify-center rounded-2xl outline-yellow-600 dark:outline-gray-600"

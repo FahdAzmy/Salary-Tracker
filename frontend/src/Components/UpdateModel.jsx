@@ -14,7 +14,7 @@ export default function UpdateModel({
   const [price, setPrice] = useState(transaction.price);
   const [date, setDate] = useState(transaction.date || "");
 
-  if (!isOpen) return null; // إخفاء الـ Modal إذا لم يكن مفتوحًا
+  if (!isOpen) return null;
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();

@@ -8,6 +8,7 @@ const ErrorPage = () => {
         <p className="mt-4">The page you are looking for does not exist.</p>
         <Link
           to="/"
+          replace={true}
           className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded"
         >
           Go to Home

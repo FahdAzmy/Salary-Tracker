@@ -8,6 +8,7 @@ const {
   login,
   logout,
   getUserSalary,
+  updateUserSalary,
 } = require("../Controllers/userController");
 const { verifyToken, isAdmin } = require("../middlewares/verifeyToken");
 const router = express.Router();
@@ -19,4 +20,5 @@ router.delete("/updateuser/:id", verifyToken, isAdmin, deleteUser);
 router.post("/login", login);
 router.post("/logout", verifyToken, logout);
 router.get("/getsalary", verifyToken, getUserSalary);
+router.put("/updatesalary", verifyToken, updateUserSalary);
 module.exports = router;
