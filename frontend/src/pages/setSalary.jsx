@@ -15,10 +15,10 @@ export default function SetSalary() {
     }
   }
   return (
-    <div>
+    <div className="flex justify-center items-center h- h-screen">
       <form
         onSubmit={handleSalaryForm}
-        className="flex flex-col gap-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md"
+        className="flex flex-col gap-4 w-3/5 justify-center   bg-gray-100 dark:bg-gray-800 p-12 rounded-lg shadow-md"
       >
         <input
           type="text"

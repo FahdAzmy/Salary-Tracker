@@ -117,7 +117,7 @@ export default function Register() {
               type="submit"
               value="Register"
               disabled={isSubmitting}
-              className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg mt-6 hover:bg-blue-600 transition duration-300"
+              className="w-full bg-blue-500 cursor-pointer text-white font-bold py-2 px-4 rounded-lg mt-6 hover:bg-blue-600 transition duration-300"
             />
 
             {/* Navigation to Login */}

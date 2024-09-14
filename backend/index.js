@@ -36,6 +36,3 @@ app.listen(Port, () => {
   connecToDB();
   console.log("Server Listening on Port", Port);
 });
-
-// dataBase Passowrd
-//7lurqHvkzcZSGyyD
