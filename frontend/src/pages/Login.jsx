@@ -17,7 +17,8 @@ export default function Login() {
       .required("Email is required"),
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+      .min(6, "Password must be at least 6 characters")
+      .default("123456"),
   });
 
   // Function to handle login form submission
@@ -58,7 +59,7 @@ export default function Login() {
 
         {/* Formik form for handling form submission */}
         <Formik
-          initialValues={{ email: "", password: "" }} // Initial form values
+          initialValues={{ email: "user@gmail.com", password: "123456" }} // Initial form values
           validationSchema={validationSchema} // Form validation schema
           onSubmit={Login} // Form submission handler
         >
