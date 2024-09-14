@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { getSalary, getTransactions } from "../api/api";
 import AddTransactionForm from "../Components/AddTransactionForm";
 import TransactionsList from "../Components/Transactions";
@@ -50,9 +50,9 @@ export default function Home() {
   }, [isLoggedIn, filter]); // Dependency on isLoggedIn and filter to refetch data when they change
 
   // Handle the change in filter selection
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value); // Update the filter state based on user selection
-  };
+  const handleFilterChange = useCallback((event) => {
+    setFilter(event.target.value);
+  }, []);
 
   return (
     <div className="dark:bg-gray-800 min-h-screen py-8">
