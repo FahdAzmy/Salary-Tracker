@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require("cors");
 const connecToDB = require("./db/connectToDB");
 const cookieParser = require("cookie-parser");
 const transactionRoute = require("./Routes/transactionRoutes");
