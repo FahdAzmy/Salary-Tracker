@@ -3,6 +3,7 @@ const connecToDB = require("./db/connectToDB");
 const cookieParser = require("cookie-parser");
 const transactionRoute = require("./Routes/transactionRoutes");
 const userRoute = require("./Routes/userRoute");
+const cors = require("cors");
 const {
   NotFoundRoutes,
   GlobalErrorHandler,
@@ -33,7 +34,7 @@ app.use((req, res, next) => {
 });
 app.use(
   cors({
-    origin: "https://salary-tracker-front.vercel.app", // استبدل بهذا العنوان إذا كان مختلفاً
+    origin: process.env.CORS_ORIGINfly, // استبدل بهذا العنوان إذا كان مختلفاً
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
