@@ -18,7 +18,7 @@ const corsOptions = {
   origin: process.env.CORS_ORIGIN || "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"],
-  credentials: true, // السماح بإرسال الكوكيز
+  credentials: true,
 };
 const Port = process.env.PORT || 4000;
 
@@ -27,11 +27,9 @@ app.use(cors(corsOptions));
 app.use("/api/salarytracker", transactionRoute);
 app.use("/api/salarytracker", userRoute);
 
-// معالجة الأخطاء
 app.all("*", NotFoundRoutes);
 app.use(GlobalErrorHandler);
 
-// الاتصال بقاعدة البيانات وبدء الخادم
 app.listen(Port, () => {
   connecToDB();
   console.log("Server Listening on Port", Port);
