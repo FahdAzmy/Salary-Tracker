@@ -27,7 +27,7 @@ app.use(cors(corsOptions));
 app.use("/api/salarytracker", transactionRoute);
 app.use("/api/salarytracker", userRoute);
 
-app.all("*", NotFoundRoutes);
+// app.all("*", NotFoundRoutes);
 app.use(GlobalErrorHandler);
 
 app.listen(Port, () => {
