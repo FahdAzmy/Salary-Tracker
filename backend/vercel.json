@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/api/salarytracker/(.*)",
-      "dest": "/index.js"
+      "dest": "/backend/index.js"
     }
   ]
 }
