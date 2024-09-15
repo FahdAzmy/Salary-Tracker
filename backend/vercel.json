@@ -9,7 +9,11 @@
   "routes": [
     {
       "src": "/api/salarytracker/(.*)",
-      "dest": "/index.js"
+      "dest": "/index.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "headers": {
+        "Acces-Control-Allow-Origin": "*"
+      }
     }
   ]
 }
