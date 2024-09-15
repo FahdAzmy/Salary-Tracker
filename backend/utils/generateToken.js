@@ -4,8 +4,9 @@ exports.generateTokenAndSetCookie = (res, userId) => {
     expiresIn: "7d",
   });
   res.cookie("token", token, {
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    httpOnly: true, // يجعل الكوكيز غير قابلة للوصول من الجافا سكريبت في المتصفح
+    secure: true,
+    sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
   return token;

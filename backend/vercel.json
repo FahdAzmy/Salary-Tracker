@@ -10,10 +10,6 @@
     {
       "src": "/api/salarytracker/(.*)",
       "dest": "/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.js"
     }
   ],
   "headers": [
