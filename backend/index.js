@@ -31,7 +31,13 @@ app.use((req, res, next) => {
   }
   next();
 });
-
+app.use(
+  cors({
+    origin: "https://salary-tracker-front.vercel.app", // استبدل بهذا العنوان إذا كان مختلفاً
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 // Other middleware
 app.use(cookieParser());
 app.use(express.json());
