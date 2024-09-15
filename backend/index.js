@@ -15,8 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 const corsOptions = {
-  origin:
-    "https://salary-tracker-front-a9urrumxt-fahd-azmys-projects.vercel.app",
+  origin: process.env.CORS_ORIGIN,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
