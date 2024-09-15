@@ -12,42 +12,40 @@ require("dotenv").config();
 
 const app = express();
 
-// CORS configuration
-const corsOptions = {
-  origin: "https://salary-tracker-front.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-CSRF-Token",
-    "X-Requested-With",
-    "Accept",
-    "Accept-Version",
-    "Content-Length",
-    "Content-MD5",
-    "Date",
-    "X-Api-Version",
-  ],
-  credentials: true,
-};
+// CORS middleware
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://salary-tracker-front.vercel.app"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  next();
+});
 
-// Apply CORS middleware
-app.use(cors(corsOptions));
-
-// Handle preflight requests
-app.options("*", cors(corsOptions));
-
+// Other middleware
 app.use(cookieParser());
 app.use(express.json());
 
-const Port = process.env.PORT || 4000;
-
+// Routes
 app.use("/api/salarytracker", transactionRoute);
 app.use("/api/salarytracker", userRoute);
 
 // Error handling
 app.use(NotFoundRoutes);
 app.use(GlobalErrorHandler);
+
+const Port = process.env.PORT || 4000;
 
 app.listen(Port, () => {
   connecToDB();
