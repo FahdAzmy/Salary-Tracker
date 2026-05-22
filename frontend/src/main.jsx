@@ -10,31 +10,38 @@ import Register from "./pages/Register.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import ProtecteRoute from "./Components/ProtecteRoute.jsx";
 import SetSalary from "./pages/setSalary.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <LandingPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: "/dashboard",
         element: <ProtecteRoute element={<Home />} />,
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login />,
       },
       {
-        path: "register",
+        path: "/register",
         element: <Register />,
       },
       {
-        path: "addsalary",
+        path: "/addsalary",
         element: <ProtecteRoute element={<SetSalary />} />,
       },
     ],
   },
 ]);
+
 createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <RouterProvider router={router} />

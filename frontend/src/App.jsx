@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-gray-300">
       <Header />
-      <main>
+      <main className="pt-[80px]">
         <Outlet />
       </main>
     </div>

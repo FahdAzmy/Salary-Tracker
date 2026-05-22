@@ -3,6 +3,7 @@ const connecToDB = require("./db/connectToDB");
 const cookieParser = require("cookie-parser");
 const transactionRoute = require("./Routes/transactionRoutes");
 const userRoute = require("./Routes/userRoute");
+const chatRoute = require("./Routes/chatRoutes");
 const cors = require("cors");
 const {
   NotFoundRoutes,
@@ -26,6 +27,7 @@ app.use(express.json());
 // Routes
 app.use("/api/salarytracker", transactionRoute);
 app.use("/api/salarytracker", userRoute);
+app.use("/api/salarytracker", chatRoute);
 
 // Error handling
 app.use(NotFoundRoutes);

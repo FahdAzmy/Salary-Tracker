@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Register - SalaryTracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-high": "#e1e8fd",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f1f3ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "outline": "#777587",
+                        "surface": "#f9f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "background": "#f9f9ff",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary": "#005338",
+                        "primary": "#3525cd",
+                        "on-primary-container": "#dad7ff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#141b2b",
+                        "surface-container": "#e9edff",
+                        "secondary-container": "#d0e1fb",
+                        "on-background": "#141b2b",
+                        "surface-dim": "#d3daef",
+                        "inverse-primary": "#c3c0ff",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-primary-fixed": "#0f0069",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-surface": "#293040",
+                        "primary-container": "#4f46e5",
+                        "secondary": "#505f76",
+                        "tertiary-container": "#006e4b",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary-container": "#54647a",
+                        "on-tertiary-container": "#67f4b7",
+                        "surface-container-highest": "#dce2f7",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#edf0ff",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-variant": "#dce2f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "xxl": "48px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel {
+            background: rgba(249, 249, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(199, 196, 216, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col justify-center items-center py-xl px-md relative overflow-hidden">
+<!-- Decorative Background Elements -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+<div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-primary-fixed opacity-30 rounded-full blur-[100px]"></div>
+<div class="absolute top-[60%] -right-[10%] w-[40%] h-[40%] bg-surface-container-high opacity-40 rounded-full blur-[80px]"></div>
+</div>
+<!-- Main Registration Container -->
+<main class="w-full max-w-[480px]">
+<!-- Brand Header -->
+<div class="text-center mb-xl">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary-container text-on-primary-container mb-md shadow-sm">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-xs hidden md:block">SalaryTracker</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs md:hidden">SalaryTracker</h1>
+<p class="font-body-md text-body-md text-secondary">Secure your financial future.</p>
+</div>
+<!-- Registration Card -->
+<div class="glass-panel rounded-[16px] shadow-[0_8px_32px_-8px_rgba(0,0,0,0.05)] p-lg sm:p-xl w-full">
+<div class="mb-lg text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Create Account</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">Enter your details to get started.</p>
+</div>
+<form action="#" class="space-y-md" method="POST">
+<!-- Full Name Input -->
+<div class="relative group">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="fullName">Full Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full pl-[40px] pr-md py-[10px] bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" id="fullName" name="fullName" placeholder="John Doe" required="" type="text"/>
+</div>
+</div>
+<!-- Email Input -->
+<div class="relative group">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full pl-[40px] pr-md py-[10px] bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" id="email" name="email" placeholder="john@example.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="relative group">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-[40px] pr-md py-[10px] bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+<p class="font-label-sm text-label-sm text-outline mt-xs">Must be at least 8 characters long.</p>
+</div>
+<!-- Confirm Password Input -->
+<div class="relative group">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="confirmPassword">Confirm Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors">lock_reset</span>
+<input class="w-full pl-[40px] pr-md py-[10px] bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full mt-lg bg-primary hover:bg-surface-tint text-on-primary font-label-lg text-label-lg py-md rounded-lg shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-sm" type="submit">
+                    Sign Up
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative my-lg">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-sm bg-surface-bright text-outline font-label-sm text-label-sm">Or</span>
+</div>
+</div>
+<!-- Footer Login Link -->
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant">
+                Already have an account? 
+                <a class="font-label-md text-label-md text-primary hover:underline hover:text-surface-tint transition-colors" href="#">Log in</a>
+</p>
+</div>
+<!-- Privacy Policy subtle link -->
+<div class="mt-lg text-center">
+<p class="font-label-sm text-label-sm text-outline">
+                By signing up, you agree to our <a class="underline hover:text-primary transition-colors" href="#">Terms of Service</a> and <a class="underline hover:text-primary transition-colors" href="#">Privacy Policy</a>.
+            </p>
+</div>
+</main>
+</body></html>

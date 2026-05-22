@@ -3,34 +3,33 @@ import PropTypes from "prop-types";
 import { addTransaction } from "../api/api";
 
 export default function AddTransactionForm({ setTransactions }) {
-  // Local state for handling form fields
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [type, setType] = useState("expense"); // "expense" | "income"
 
-  // Function to handle form submission and add new transaction
   function AddnewTransaction(ev) {
-    ev.preventDefault(); // Prevent default form behavior
+    ev.preventDefault();
 
-    // Ensure required fields are filled
     if (!name || !price) {
       alert("Please set Name and Price");
       return;
     }
 
-    // Prepare transaction data
-    const newTransaction = { name, description, price, date };
+    // Expense: positive price (salary -= price)
+    // Income:  negative price (salary -= negative = salary += amount)
+    const finalPrice = type === "income" ? -Math.abs(Number(price)) : Math.abs(Number(price));
 
-    // Call the API to add a transaction
+    const newTransaction = { name, description, price: finalPrice, date };
+
     addTransaction(newTransaction).then((json) => {
-      // Clear the form fields after successful transaction addition
       setName("");
       setDate("");
       setPrice("");
       setDescription("");
+      setType("expense");
 
-      // Update the transaction list in the parent component
       setTransactions((prevTransactions) => [
         ...prevTransactions,
         json.transaction,
@@ -39,84 +38,132 @@ export default function AddTransactionForm({ setTransactions }) {
   }
 
   return (
-    <>
+    <div className="md:col-span-4 bg-surface-container-lowest dark:bg-gray-800 border border-outline-variant dark:border-gray-700 rounded-xl p-lg shadow-sm flex flex-col h-full">
+      <h3 className="font-headline-sm text-headline-sm text-on-surface dark:text-white mb-md">
+        New Transaction
+      </h3>
       <form
         onSubmit={AddnewTransaction}
-        className="bg-white dark:bg-gray-800 p-6 rounded-lg m-auto  w-4/5"
+        className="flex flex-col gap-md flex-grow justify-between"
       >
-        <div className="grid grid-cols-1 max-md:grid-cols-2  gap-4 mb-4">
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
+        <div className="space-y-md">
+
+          {/* Type Toggle — Expense / Income */}
+          <div className="flex gap-sm">
+            <button
+              type="button"
+              onClick={() => setType("expense")}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-medium transition-all border ${
+                type === "expense"
+                  ? "bg-red-500/10 border-red-400 text-red-500 dark:text-red-400 shadow-sm"
+                  : "bg-transparent border-outline-variant dark:border-gray-700 text-secondary dark:text-gray-400 hover:bg-surface-container-low dark:hover:bg-gray-700"
+              }`}
+            >
+              <span className="material-symbols-outlined text-[16px]">shopping_cart</span>
+              Expense
+            </button>
+            <button
+              type="button"
+              onClick={() => setType("income")}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-medium transition-all border ${
+                type === "income"
+                  ? "bg-emerald-500/10 border-emerald-400 text-emerald-600 dark:text-emerald-400 shadow-sm"
+                  : "bg-transparent border-outline-variant dark:border-gray-700 text-secondary dark:text-gray-400 hover:bg-surface-container-low dark:hover:bg-gray-700"
+              }`}
+            >
+              <span className="material-symbols-outlined text-[16px]">account_balance</span>
+              Income
+            </button>
+          </div>
+
+          {/* Name Input */}
+          <div className="flex flex-col gap-xs">
+            <label className="font-label-sm text-label-sm text-secondary dark:text-gray-400">
               Item Name
             </label>
             <input
               type="text"
               value={name}
               onChange={(ev) => setName(ev.target.value)}
-              placeholder="Name"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-surface dark:bg-gray-900 border border-outline-variant dark:border-gray-700 rounded-lg px-md py-2 font-body-sm text-body-sm text-on-surface dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-full placeholder:text-outline/50"
+              placeholder={type === "income" ? "e.g., Freelance, Salary" : "e.g., Coffee, Rent"}
             />
           </div>
 
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
+          {/* Description Input */}
+          <div className="flex flex-col gap-xs">
+            <label className="font-label-sm text-label-sm text-secondary dark:text-gray-400">
               Description
             </label>
             <input
               type="text"
               value={description}
               onChange={(ev) => setDescription(ev.target.value)}
-              placeholder="Description"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
-              Date
-            </label>
-            <input
-              type="date"
-              value={date}
-              onChange={(ev) =>
-                setDate(
-                  ev.target.value.length === 0
-                    ? new Date().toISOString().split("T")[0]
-                    : ev.target.value
-                )
-              }
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-surface dark:bg-gray-900 border border-outline-variant dark:border-gray-700 rounded-lg px-md py-2 font-body-sm text-body-sm text-on-surface dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-full placeholder:text-outline/50"
+              placeholder="Optional details"
             />
           </div>
 
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
-              Price
-            </label>
-            <input
-              type="number"
-              placeholder="Price"
-              value={price}
-              onChange={(ev) => setPrice(ev.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <div className="flex gap-md">
+            {/* Date Input */}
+            <div className="flex flex-col gap-xs w-1/2">
+              <label className="font-label-sm text-label-sm text-secondary dark:text-gray-400">
+                Date
+              </label>
+              <input
+                type="date"
+                value={date}
+                onChange={(ev) =>
+                  setDate(
+                    ev.target.value.length === 0
+                      ? new Date().toISOString().split("T")[0]
+                      : ev.target.value
+                  )
+                }
+                className="bg-surface dark:bg-gray-900 border border-outline-variant dark:border-gray-700 rounded-lg px-sm py-2 font-body-sm text-body-sm text-on-surface dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-full"
+              />
+            </div>
+
+            {/* Price Input */}
+            <div className="flex flex-col gap-xs w-1/2">
+              <label className="font-label-sm text-label-sm text-secondary dark:text-gray-400">
+                Amount
+              </label>
+              <div className="relative">
+                <span className="absolute left-md top-1/2 -translate-y-1/2 text-outline font-body-sm">
+                  $
+                </span>
+                <input
+                  type="number"
+                  placeholder="0.00"
+                  value={price}
+                  min="0"
+                  onChange={(ev) => setPrice(ev.target.value)}
+                  className="bg-surface dark:bg-gray-900 border border-outline-variant dark:border-gray-700 rounded-lg pl-[32px] pr-md py-2 font-body-sm text-body-sm text-on-surface dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-full placeholder:text-outline/50"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500"
+          className={`mt-lg font-label-lg text-label-lg py-2 px-md rounded-lg w-full transition-colors active:scale-[0.98] shadow-sm flex items-center justify-center gap-sm text-white ${
+            type === "income"
+              ? "bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-700"
+              : "bg-primary hover:bg-surface-tint dark:bg-blue-600 dark:hover:bg-blue-700"
+          }`}
         >
-          Add New Transaction
+          <span className="material-symbols-outlined text-[18px]">
+            {type === "income" ? "add_circle" : "remove_circle"}
+          </span>
+          {type === "income" ? "Add Income" : "Add Expense"}
         </button>
       </form>
-    </>
+    </div>
   );
 }
 
-// PropTypes to ensure setTransactions is passed correctly
 AddTransactionForm.propTypes = {
   setTransactions: PropTypes.func.isRequired,
 };

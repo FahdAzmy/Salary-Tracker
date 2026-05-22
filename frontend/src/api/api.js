@@ -194,3 +194,24 @@ export const updateSalary = async (newSalary) => {
     throw error;
   }
 };
+
+// Send a chat message to the AI assistant
+export const chatWithAI = async (message, conversationHistory = []) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/chat`,
+      { message, conversationHistory },
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error in chatWithAI:",
+      error.response ? error.response.data : error.message
+    );
+    throw error;
+  }
+};

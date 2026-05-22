@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MoonIcon, SunIcon } from "@heroicons/react/16/solid";
 import Cookies from "js-cookie";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -31,7 +30,7 @@ function Header() {
     });
   };
 
-  // Handle user logout: remove token cookie, update authentication state, and navigate to login page
+  // Handle user logout
   function handleLogout() {
     Cookies.remove("token");
     setIsLoggedIn(false);
@@ -39,55 +38,73 @@ function Header() {
   }
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-lg dark:border-b-2 dark:border-slate-700  p-4 max-md:p-2 max-md:pb-2.5">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Left: Page Title */}
-        <div className="text-xl max-md:text-lg font-bold text-gray-800 dark:text-white">
-          Salary Tracker
-        </div>
+    <header className="fixed top-0 w-full z-50 glass-panel border-b border-outline-variant dark:border-gray-700 shadow-sm transition-all duration-300">
+      <div className="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+        {/* Left: Page Title / Logo */}
+        <Link to="/" className="flex items-center gap-sm">
+          <span
+            className="material-symbols-outlined text-primary dark:text-blue-400 text-2xl"
+            style={{ fontVariationSettings: "'FILL' 1" }}
+          >
+            account_balance_wallet
+          </span>
+          <span className="font-headline-md text-headline-md font-bold text-primary dark:text-blue-400 tracking-tight">
+            SalaryTracker
+          </span>
+        </Link>
 
-        {/* Right: Login, Register, Dark Mode Toggle */}
-        <div className="flex items-center space-x-2 gap-1 max-md:space-x-3">
-          {/* Show Logout button if user is logged in, otherwise show Login and Register links */}
+        {/* Right: Navigation Links */}
+        <nav className="hidden md:flex items-center gap-lg">
           {isLoggedIn ? (
-            <button
-              onClick={handleLogout}
-              className="text-white dark:text-white max-md:text-sm bg-red-500 outline outline-red-500 px-6 py-2 font-bold rounded-lg outline-1 hover:bg-red-600 max-md:px-2.5"
-            >
-              Logout
-            </button>
+            <>
+              <Link
+                to="/dashboard"
+                className="font-label-lg text-label-lg text-secondary dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 transition-colors"
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="font-label-lg text-label-lg bg-red-500 text-white px-lg py-sm rounded-lg hover:bg-red-600 transition-colors shadow-sm"
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link
-                to={"/login"}
-                className="text-white dark:text-white max-md:text-sm bg-blue-500 outline outline-blue-500 px-6 py-2 font-bold rounded-lg outline-1 hover:bg-blue-600 max-md:px-2.5"
+                className="font-label-lg text-label-lg text-secondary dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 transition-colors"
+                to="/login"
               >
                 Login
               </Link>
-
               <Link
-                to={"/register"}
-                className="text-white dark:text-white max-md:text-sm bg-blue-500 outline outline-blue-500 px-5 py-2 font-bold rounded-lg outline-1 hover:bg-blue-600 max-md:px-2.5"
+                className="font-label-lg text-label-lg bg-primary text-on-primary px-lg py-sm rounded-lg hover:bg-primary-container dark:hover:bg-blue-600 transition-colors shadow-sm"
+                to="/register"
               >
                 Register
               </Link>
             </>
           )}
 
-          {/* Dark Mode Toggle Button */}
+          {/* Dark Mode Toggle */}
           <button
+            aria-label="Toggle Theme"
+            className="text-secondary dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 transition-colors p-xs rounded-full hover:bg-surface-container-highest dark:hover:bg-gray-700"
             onClick={toggleDarkMode}
-            className="w-7 h-7 outline outline-2 justify-center rounded-2xl outline-yellow-600 dark:outline-gray-600"
           >
-            {darkMode ? (
-              <MoonIcon className="p-1 text-gray-500" />
-            ) : (
-              <SunIcon className="p-1 text-yellow-600" />
-            )}
+            <span className="material-symbols-outlined">
+              {darkMode ? "light_mode" : "dark_mode"}
+            </span>
           </button>
-        </div>
+        </nav>
+
+        {/* Mobile Menu Toggle */}
+        <button className="md:hidden text-on-surface dark:text-white p-xs">
+          <span className="material-symbols-outlined">menu</span>
+        </button>
       </div>
-    </nav>
+    </header>
   );
 }
 
