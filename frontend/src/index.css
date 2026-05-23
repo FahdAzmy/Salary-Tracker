@@ -14,7 +14,6 @@
     color: theme('colors.on-background');
   }
 }
-
 @layer utilities {
   .bg-pattern {
     background-image: radial-gradient(theme('colors.outline-variant') 1px, transparent 1px);
